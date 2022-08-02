@@ -10,7 +10,7 @@
 import { axios } from "@/common/api.service.js";
 
 export default {
-  name: "Task",
+  name: "TaskDetail",
   data() {
     return {
       task: {},
