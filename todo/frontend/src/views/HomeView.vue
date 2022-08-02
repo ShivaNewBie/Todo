@@ -15,6 +15,7 @@
       :task="task"
       :slug="task.slug"
       @delete-task="deleteTask"
+
     />
   </div>
 </template>
@@ -34,10 +35,14 @@ export default {
       editTask: null,
       error: null,
       description: null,
+      requestUser: null 
     };
   },
   components: {
     Task,
+  },
+  computed: {
+
   },
   props: {
     slug: {
@@ -45,6 +50,9 @@ export default {
     },
   },
   methods: {
+    setRequestUser(){
+      this.requestUser = window.localStorage.getItem('username')
+    },
     async getTasks() {
       let endpoint = "/api/v1/tasks/";
 
@@ -118,7 +126,7 @@ export default {
     }
   },
   created() {
-    this.getTasks();
+    this.getTasks(), this.setRequestUser()
   },
 };
 </script>

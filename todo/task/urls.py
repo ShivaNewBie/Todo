@@ -5,7 +5,7 @@ from rest_framework.routers import DefaultRouter
 from task.api import views as tv 
 
 router = DefaultRouter()
-router.register(r'tasks', tv.TaskViewSet)
+router.register(r'tasks', tv.TaskViewSet,basename='Task')
 
 urlpatterns = [
     path('', include(router.urls))
