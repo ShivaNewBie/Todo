@@ -8,31 +8,13 @@
           ><h1>{{ task.description }}</h1></router-link
         >
       </div>
-      <div v-else>
-        <form @submit.prevent="emitUpdateTask">
-          <textarea
-            :value="modelValue"
-            @input="$emit('update:modelValue', $event.target.value)"
-            name=""
-            id=""
-            class="form-control"
-            rows="2"
-          ></textarea>
-          <button type="submit" class="btn btn-danger mt-2 me-2">Save</button>
-        </form>
-        <button @click="showForm = !showForm" class="btn btn-primary mt-2">
-          Cancel
-        </button>
-      </div>
+
       <div class="col-md-2 mt-1">
-        <button
-          @click="showForm = !showForm"
-          type="button"
-          class="btn btn-primary me-2"
-          v-show="showForm === false"
+        <router-link
+          class="btn btn-primary"
+          :to="{ name: 'task-edit', params: { slug: slug } }"
+          >Edit</router-link
         >
-          Edit
-        </button>
 
         <button
           v-show="!showForm"

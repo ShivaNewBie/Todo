@@ -15,8 +15,6 @@
       :task="task"
       :slug="task.slug"
       @delete-task="deleteTask"
-      @update-task="updateTask"
-      v-model="description"
     />
   </div>
 </template>
