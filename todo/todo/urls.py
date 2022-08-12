@@ -28,7 +28,6 @@ urlpatterns = [
     path('accounts/register/',
         RegistrationView.as_view(form_class=CustomerUserForm,success_url='/'),
         name='django_registration_register'),
-    path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 
     path('api/v1/', include('task.urls')),
