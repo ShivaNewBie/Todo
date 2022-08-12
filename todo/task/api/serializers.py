@@ -7,6 +7,6 @@ class TaskSerializer(serializers.ModelSerializer):
     slug = serializers.SlugField(read_only=True)
     class Meta:
         model = Task
-        fields = ['description','slug','user','status']
+        fields = ['description','slug','user']
 
     
