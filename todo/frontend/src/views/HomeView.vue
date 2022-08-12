@@ -15,7 +15,6 @@
       :task="task"
       :slug="task.slug"
       @delete-task="deleteTask"
-
     />
   </div>
 </template>
@@ -35,23 +34,21 @@ export default {
       editTask: null,
       error: null,
       description: null,
-      requestUser: null 
+      requestUser: null,
     };
   },
   components: {
     Task,
   },
-  computed: {
-
-  },
+  computed: {},
   props: {
     slug: {
       type: String,
     },
   },
   methods: {
-    setRequestUser(){
-      this.requestUser = window.localStorage.getItem('username')
+    setRequestUser() {
+      this.requestUser = window.localStorage.getItem("username");
     },
     async getTasks() {
       let endpoint = "/api/v1/tasks/";
@@ -74,11 +71,12 @@ export default {
       }
     },
     async updateTask(task) {
+      console.log(task);
       let endpoint = `/api/v1/tasks/${task.slug}/`;
 
       try {
         const response = await axios.put(endpoint, {
-          description: this.description,
+          description: task.description,
         });
         this.tasks.unshift(response.data);
 
@@ -126,7 +124,7 @@ export default {
     }
   },
   created() {
-    this.getTasks(), this.setRequestUser()
+    this.getTasks(), this.setRequestUser();
   },
 };
 </script>

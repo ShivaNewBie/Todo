@@ -1,31 +1,36 @@
 <template>
   <div class="shadow p-3 mb-5 bg-body rounded">
-    <div class="row">
-        <div v-if="showForm === false" class="col-md-10">
-          <router-link
-            class="task-link"
-            :to="{ name: 'task', params: { slug: slug } }"
-            ><h1>{{ task.description }}</h1></router-link
-          >
-        </div>
-  
-        <div class="col-md-2 mt-1">
-          <router-link
-            class="btn btn-primary me-1"
-            :to="{ name: 'task-edit', params: { slug: slug } }"
-            >Edit</router-link
-          >
-  
-          <button
-            v-show="!showForm"
-            @click="emitDeleteTask"
-            type="button"
-            class="btn btn-danger"
-          >
-            Delete
-          </button>
+    <div class="d-flex align-items-center">
+      <div class="d-inline-block flex-shrink-0">
+        <div class="d-inline-block flex-shrink-0">
+          <div class="form-check"></div>
         </div>
       </div>
+      <div class="d-inline-block flex-grow-1">
+        <div class="task-link">
+          <h1>{{ task.description }}</h1>
+        </div>
+      </div>
+
+      <div class="d-inline-block">
+        <router-link
+          class="btn btn-primary me-1"
+          :to="{ name: 'task-edit', params: { slug: slug } }"
+          >Edit</router-link
+        >
+      </div>
+      <div class="d-inline-block mr-5"></div>
+      <div class="d-inline-block mr-5">
+        <button
+          v-show="!showForm"
+          @click="emitDeleteTask"
+          type="button"
+          class="btn btn-danger"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -38,12 +43,11 @@ export default {
     return {
       showForm: false,
       description: null,
+      status: false,
     };
   },
+  emits: [],
   props: {
-    modelValue: {
-      type: String,
-    },
     slug: {
       type: String,
       required: true,
@@ -52,15 +56,13 @@ export default {
       type: Object,
       required: true,
     },
-  
   },
-  emits: ["update:modelValue", "delete-task", "update-task"],
+  emits: ["delete-task", "update-task"],
   methods: {
     emitDeleteTask() {
       this.$emit("delete-task", this.task);
     },
     emitUpdateTask() {
-      this.showForm = false;
       this.$emit("update-task", this.task);
     },
   },
