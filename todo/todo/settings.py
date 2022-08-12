@@ -28,6 +28,7 @@ DEBUG = config('DEBUG', cast=bool)
 ALLOWED_HOSTS = ['todo-crud-list.herokuapp.com', '127.0.0.1']
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -88,10 +89,10 @@ WSGI_APPLICATION = 'todo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'todo', 
-        'USER': 'postgres', 
+        'NAME': 'd55loc49poifrr', 
+        'USER': 'xzcunbigzuqhld', 
         'PASSWORD': config('PASSWORD'),
-        'HOST': '127.0.0.1', 
+        'HOST': 'ec2-54-80-122-11.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
