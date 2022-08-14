@@ -15,6 +15,7 @@
       :task="task"
       :slug="task.slug"
       @delete-task="deleteTask"
+      @update-status="updateStatus"
     />
   </div>
 </template>
@@ -79,11 +80,27 @@ export default {
           description: task.description,
         });
         this.tasks.unshift(response.data);
-
+        this.tasks = this.tasks.map((task) =>
+          task.slug === slug ? { ...task, status: response.status } : task
+        );
         console.log(response.data);
       } catch (error) {
         console.log(error);
       }
+    },
+    async updateStatus(task) {
+      let endpoint = `/api/v1/tasks/${task.slug}/`;
+      const data = {
+        slug: task.slug,
+        status: !task.status,
+        description: task.description,
+      };
+      const response = await axios.put(endpoint, data);
+      this.tasks = this.tasks.map((task) =>
+        task.slug === data.slug ? data : task
+      );
+      // console.log(data);
+      console.log(response);
     },
     async onSubmit() {
       if (!this.newTask) {
@@ -114,7 +131,12 @@ export default {
       console.log("testing");
       try {
         const response = await axios.get(endpoint);
-        return next((vm) => (vm.description = response.data.description));
+        return next(
+          (vm) => (
+            (vm.description = response.data.description),
+            (vm.status = response.data.status)
+          )
+        );
       } catch (error) {
         console.log(error.response);
         alert(error.response.statusText);

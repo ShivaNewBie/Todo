@@ -1,8 +1,7 @@
-from rest_framework import viewsets,generics
-from rest_framework.views import APIView
+from rest_framework import viewsets
 
 
-from .serializers import TaskSerializer
+from task.api.serializers import TaskSerializer
 
 from task.models import Task
 
@@ -16,4 +15,4 @@ class TaskViewSet(viewsets.ModelViewSet):
    
     def get_queryset(self):
         user = self.request.user 
-        return Task.objects.filter(user=user)
+        return Task.objects.filter(user=user).order_by('-created_at')

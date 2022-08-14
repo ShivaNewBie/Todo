@@ -1,14 +1,14 @@
 <template>
   <div class="shadow p-3 mb-5 bg-body rounded">
     <div class="d-flex align-items-center">
-      <div class="d-inline-block flex-shrink-0">
-        <div class="d-inline-block flex-shrink-0">
-          <div class="form-check"></div>
-        </div>
-      </div>
       <div class="d-inline-block flex-grow-1">
         <div class="task-link">
-          <h1>{{ task.description }}</h1>
+          <h1
+            @click="$emit('update-status', this.task)"
+            :class="[task.status ? 'done' : '']"
+          >
+            {{ task.description }}
+          </h1>
         </div>
       </div>
 
@@ -19,7 +19,6 @@
           >Edit</router-link
         >
       </div>
-      <div class="d-inline-block mr-5"></div>
       <div class="d-inline-block mr-5">
         <button
           v-show="!showForm"
@@ -43,10 +42,8 @@ export default {
     return {
       showForm: false,
       description: null,
-      status: false,
     };
   },
-  emits: [],
   props: {
     slug: {
       type: String,
@@ -57,7 +54,7 @@ export default {
       required: true,
     },
   },
-  emits: ["delete-task", "update-task"],
+  emits: ["delete-task", "update-task", "update-status"],
   methods: {
     emitDeleteTask() {
       this.$emit("delete-task", this.task);
@@ -68,3 +65,9 @@ export default {
   },
 };
 </script>
+
+<style scope>
+.done {
+  text-decoration: line-through;
+}
+</style>

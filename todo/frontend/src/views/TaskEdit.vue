@@ -53,7 +53,12 @@ export default {
       const endpoint = `/api/v1/tasks/${to.params.slug}/`;
       try {
         const response = await axios.get(endpoint);
-        return next((vm) => (vm.description = response.data.description));
+        return next(
+          (vm) => (
+            (vm.description = response.data.description),
+            (vm.status = response.data.status)
+          )
+        );
       } catch (error) {
         console.log(error.response);
         alert(error.response.statusText);
