@@ -10,4 +10,5 @@ def auto_add_slug(sender,instance,*args,**kwargs):
     if instance and not instance.slug:
         slug = slugify(instance.description)
         random_string = get_random_string(length=4)
+        print(random_string)
         instance.slug = slug + '-' + random_string
